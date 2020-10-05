@@ -37,7 +37,17 @@ body.wrong {
     box-shadow: 0 0 10px 2px;
 }
 
-.btn-grid {
+.quiz-data {
+    border: 1px solid hsl(var(--hue), 94%, 30%);;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: black;
+    outline: none;
+}
+
+.btn-grid, #data-container {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
