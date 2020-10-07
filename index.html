@@ -11,11 +11,16 @@
 </head>
 <body>
     
+    <!-- Main Container -->
     <div class="container">
-        <div id="data-container" class="hide">
-            <div class="quiz-data">Timer: <span id="time"></span></div>
-            <div class="quiz-data">Score: <span id="score"></span></div>
+
+        <!-- Timer and Score -->
+        <div id="data-container" class="btn-grid hide">
+            <div class="quiz-data" id="timer"></div>
+            <div class="quiz-data" id="score"></div>
         </div>
+
+        <!-- Questions -->
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">
@@ -25,12 +30,16 @@
                 <button class="btn">Answer 4</button>
             </div>
         </div>
+
+        <!-- Controls -->
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
+            <button id="submit-btn" class="submit-btn btn hide">Submit</button>
         </div>
     </div>
     
+    <!-- Script Link -->
     <script src="./script.js"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@ body.wrong {
     outline: none;
 }
 
-.btn-grid, #data-container {
+.btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
@@ -79,7 +79,7 @@ body.wrong {
     color: black;
 }
 
-.start-btn, .next-btn {
+.start-btn, .next-btn, .submit-btn {
     font-size: 1.25rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -93,4 +93,4 @@ body.wrong {
 
 .hide {
     display: none;
-}
+} 

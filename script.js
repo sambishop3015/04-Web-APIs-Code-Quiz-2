@@ -1,34 +1,58 @@
 //Make sure the html is loaded before running script
 $(document).ready(function() {
 
+//Quiz Variables
 const startButton = document.getElementById('start-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons');
 const nextButton = document.getElementById('next-btn');
+const timer = document.getElementById('timer');
+const submitButton = document.getElementById('submit-btn');
+const dataContainer = document.getElementById('data-container');
 
+// Timer Variables
+let count = 60;
+var timeInt; 
+
+// Shuffle Variables
 let shuffledQuestions, currentQuestionIndex;
 
-$(startButton).on('click', startGame);
+// Start Button Function
+$(startButton).on('click', function() {
+    timeInt = setInterval(counter, 1000);
+    startGame();
+})
+
+// Decriment Time
+function counter() {
+    $('#timer').text('Time Remaining: ' + --count);
+}
+
+// Next Button Function
 $(nextButton).on('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
 
+// Start Game Function
 function startGame() {
     console.log('Started');
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
-    setNextQuestion()
+    dataContainer.classList.remove('hide');
+    setNextQuestion();
 }
 
+// Next Random Question Function
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
+// Show Next Question Function
 function showQuestion(question) {
     questionElement.innerText = question.question;
     question.answers.forEach(answer => {
@@ -43,6 +67,7 @@ function showQuestion(question) {
     });
 }
 
+// Reset Visible and Hidden Elements Function
 function resetState() {
     clearStatusClass(document.body)
     nextButton.classList.add('hide');
@@ -52,21 +77,26 @@ function resetState() {
     }
 }
 
+// Answer Checker Function
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
+    setStatusClass(document.body,             )
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
     } else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+        submitButton.classList.remove('hide')
+        clearInterval(timeInt);
+        alert('You finished with ' + count + ' seconds left.');
+        var initials = prompt('Enter Initials for High Score Board!');
+        alert(initials + 's time left was ' + count + ' seconds');
     }
 }
 
+// Correct/Wrong Class Assignment Function
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -76,17 +106,40 @@ function setStatusClass(element, correct) {
     }
 }
 
+// Corrct/Wrong Class Removal Function
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
 
+// Questions
 const questions = [
     {
         question: 'What is 2 + 2?',
         answers: [
             {text: '4', correct: true},
             {text: '22', correct: false}
+        ]
+    },
+    {
+        question: 'What is 3 + 3?',
+        answers: [
+            {text: '6', correct: true},
+            {text: '33', correct: false}
+        ]
+    },
+    {
+        question: 'What is 4 + 4?',
+        answers: [
+            {text: '8', correct: true},
+            {text: '44', correct: false}
+        ]
+    },
+    {
+        question: 'What is 5 + 5?',
+        answers: [
+            {text: '10', correct: true},
+            {text: '55', correct: false}
         ]
     }
 ]
