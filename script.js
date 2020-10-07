@@ -10,17 +10,20 @@ const nextButton = document.getElementById('next-btn');
 const timer = document.getElementById('timer');
 const submitButton = document.getElementById('submit-btn');
 const dataContainer = document.getElementById('data-container');
+const scoreEl = document.getElementById('score');
 
 // Timer Variables
-let count = 3;
+let count = 60;
 var timeInt; 
+
+// Score Variable
+let score = 0;
 
 // Shuffle Variables
 let shuffledQuestions, currentQuestionIndex;
 
 // Start Button Function
 $(startButton).on('click', function() {
-    timeInt = setInterval(counter, 1000);
     startGame();
 })
 
@@ -46,6 +49,7 @@ function startGame() {
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
     dataContainer.classList.remove('hide');
+    timeInt = setInterval(counter, 1000);
     setNextQuestion();
 }
 
@@ -84,7 +88,7 @@ function resetState() {
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
-    setStatusClass(document.body,             )
+    setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -102,19 +106,22 @@ function selectAnswer(e) {
 
 function stopQuiz(){
     clearInterval(timeInt);
-    alert('You finished with ' + count + ' seconds left.');
+    alert('You finished with ' + count + ' seconds left and ' + score + ' points!');
     var initials = prompt('Enter Initials for High Score Board!');
-    alert(initials + 's time left was ' + count + ' seconds');
+    alert(initials + 's score was ' + score + ' with ' + count + ' seconds left on the clock!');
 }
 
 // Correct/Wrong Class Assignment Function
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
-        element.classList.add('correct')
+        element.classList.add('correct');
+        score = ++score;
+        scoreEl.innerText = 'Score: ' + score;
     } else {
         element.classList.add('wrong')
     }
+    
 }
 
 // Corrct/Wrong Class Removal Function
