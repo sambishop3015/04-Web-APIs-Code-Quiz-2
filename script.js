@@ -12,7 +12,7 @@ const submitButton = document.getElementById('submit-btn');
 const dataContainer = document.getElementById('data-container');
 
 // Timer Variables
-let count = 60;
+let count = 3;
 var timeInt; 
 
 // Shuffle Variables
@@ -27,6 +27,9 @@ $(startButton).on('click', function() {
 // Decriment Time
 function counter() {
     $('#timer').text('Time Remaining: ' + --count);
+    if (count < 1) {
+        stopQuiz();
+    }
 }
 
 // Next Button Function
@@ -89,11 +92,19 @@ function selectAnswer(e) {
     nextButton.classList.remove('hide')
     } else {
         submitButton.classList.remove('hide')
-        clearInterval(timeInt);
-        alert('You finished with ' + count + ' seconds left.');
-        var initials = prompt('Enter Initials for High Score Board!');
-        alert(initials + 's time left was ' + count + ' seconds');
+        stopQuiz();
+        // clearInterval(timeInt);
+        // alert('You finished with ' + count + ' seconds left.');
+        // var initials = prompt('Enter Initials for High Score Board!');
+        // alert(initials + 's time left was ' + count + ' seconds');
     }
+}
+
+function stopQuiz(){
+    clearInterval(timeInt);
+    alert('You finished with ' + count + ' seconds left.');
+    var initials = prompt('Enter Initials for High Score Board!');
+    alert(initials + 's time left was ' + count + ' seconds');
 }
 
 // Correct/Wrong Class Assignment Function
