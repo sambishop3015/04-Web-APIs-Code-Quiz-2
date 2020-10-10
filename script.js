@@ -109,6 +109,7 @@ function stopQuiz(){
     alert('You finished with ' + count + ' seconds left and ' + score + ' points!');
     var initials = prompt('Enter Initials for High Score Board!');
     alert(initials + 's score was ' + score + ' with ' + count + ' seconds left on the clock!');
+    $(submitButton).on('click', resetState);
 }
 
 // Correct/Wrong Class Assignment Function
